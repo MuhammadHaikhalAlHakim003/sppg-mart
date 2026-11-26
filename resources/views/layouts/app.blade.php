@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -59,6 +60,7 @@
                             </button>
                         </form>
                     </details>
+
                     @if ($isLanding && (! auth()->check() || ! auth()->user()->isBuyer()))
                         <form action="{{ route('catalog') }}" method="GET" role="search" class="hidden h-10 w-40 overflow-hidden rounded-lg border border-white/35 bg-white/95 text-slate-800 shadow-sm md:flex md:w-44 xl:w-52">
                             <input type="search" name="search" value="{{ request('search') }}" aria-label="Cari produk" placeholder="Cari produk..." class="min-w-0 flex-1 bg-transparent px-3 text-xs outline-none placeholder:text-slate-500 sm:text-sm">
@@ -70,6 +72,29 @@
                             </button>
                         </form>
                     @endif
+
+                    {{-- MENU BARU: ASISTEN AI --}}
+                    <a href="{{ route('chatbot.index') }}"
+                       aria-label="Asisten AI"
+                       title="Asisten AI"
+                       class="inline-flex min-h-9 min-w-9 items-center justify-center gap-1.5 rounded-lg px-1 py-2 text-sm font-semibold transition sm:min-h-10 sm:min-w-10 sm:px-3 {{ request()->routeIs('chatbot.*') ? ($isLanding ? 'bg-white/15 text-white' : 'bg-sky-50 text-sky-700') : ($isLanding ? 'text-white hover:bg-white/10' : 'text-slate-600 hover:bg-sky-50') }}">
+
+                        <svg aria-hidden="true"
+                             viewBox="0 0 24 24"
+                             fill="none"
+                             stroke="currentColor"
+                             stroke-width="1.8"
+                             stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="h-5 w-5 shrink-0">
+                            <path d="m12 3 1.9 5.8L20 11l-6.1 2.2L12 19l-1.9-5.8L4 11l6.1-2.2L12 3Z"/>
+                            <path d="m19 14 1.1 2.9L23 18l-2.9 1.1L19 22l-1.1-2.9L15 18l2.9-1.1L19 14Z"/>
+                        </svg>
+
+                        <span class="sr-only md:not-sr-only">Asisten AI</span>
+                    </a>
+                    {{-- AKHIR MENU ASISTEN AI --}}
+
                     @auth
                         @if (auth()->user()->isBuyer())
                             @php($cartCount = \App\Models\Cart::where('user_id', auth()->id())->where('status', 'active')->withSum('items', 'quantity')->value('items_sum_quantity') ?? 0)
@@ -77,6 +102,7 @@
                                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 shrink-0"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.7 8.7 0 0 1-4-.9L3 20l1.1-4.1a8.1 8.1 0 0 1-1.1-4.2A8.4 8.4 0 0 1 11.5 3h1A8.4 8.4 0 0 1 21 11.5Z"></path></svg>
                                 <span class="sr-only md:not-sr-only">Chat</span>
                             </a>
+
                             <a href="{{ route('cart.index') }}" aria-label="Keranjang" title="Keranjang" class="relative inline-flex min-h-9 min-w-9 items-center justify-center gap-1.5 rounded-lg px-1 py-2 text-sm font-semibold {{ $isLanding ? 'text-white hover:bg-white/10' : 'text-orange-700 hover:bg-orange-50' }} sm:min-h-10 sm:min-w-10 sm:px-3">
                                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 shrink-0"><path d="M3 4h2l2.2 11.2a2 2 0 0 0 2 1.6h8.9a2 2 0 0 0 1.9-1.4L22 8H6"></path><circle cx="10" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
                                 <span class="sr-only md:not-sr-only">Keranjang</span>
@@ -84,6 +110,7 @@
                                     <span class="absolute -right-1 -top-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-orange-600 px-1 text-[10px] font-bold text-white">{{ $cartCount }}</span>
                                 @endif
                             </a>
+
                             <a href="{{ route('transactions.index') }}" aria-label="Pesanan" title="Pesanan" class="inline-flex min-h-9 min-w-9 items-center justify-center gap-1.5 rounded-lg px-1 py-2 text-sm font-semibold {{ $isLanding ? 'text-white hover:bg-white/10' : 'text-slate-600 hover:bg-orange-50' }} sm:min-h-10 sm:min-w-10 sm:px-3">
                                 <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 shrink-0"><path d="M7 3h10a2 2 0 0 1 2 2v16l-7-3-7 3V5a2 2 0 0 1 2-2Z"></path><path d="M9 8h6M9 12h6"></path></svg>
                                 <span class="sr-only md:not-sr-only">Pesanan</span>
@@ -100,10 +127,12 @@
                                 <span class="sr-only md:not-sr-only">Dashboard</span>
                             </a>
                         @endif
+
                         <a href="{{ route('profile.edit') }}" aria-label="Profil" title="Profil" class="inline-flex min-h-9 min-w-9 items-center justify-center gap-1.5 rounded-lg px-1 py-2 text-sm font-semibold {{ $isLanding ? 'text-white hover:bg-white/10' : 'text-slate-600 hover:bg-orange-50' }} sm:min-h-10 sm:min-w-10 sm:px-3">
                             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 shrink-0"><circle cx="12" cy="8" r="4"></circle><path d="M4.5 21a7.5 7.5 0 0 1 15 0"></path></svg>
                             <span class="sr-only md:not-sr-only">Profil</span>
                         </a>
+
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" aria-label="Keluar" title="Keluar" class="inline-flex min-h-9 min-w-9 items-center justify-center gap-1.5 rounded-lg border px-1 py-2 text-sm font-semibold {{ $isLanding ? 'border-white/30 text-white hover:bg-white/10' : 'border-slate-200 text-slate-600 hover:bg-slate-50' }} sm:min-h-10 sm:min-w-10 sm:px-3">
@@ -116,6 +145,7 @@
                             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 shrink-0"><circle cx="9" cy="8" r="4"></circle><path d="M2.5 21a6.5 6.5 0 0 1 13 0M19 8v6M16 11h6"></path></svg>
                             <span class="sr-only md:not-sr-only">Buat Akun</span>
                         </a>
+
                         <a href="{{ route('login') }}" aria-label="Masuk" title="Masuk" class="inline-flex min-h-9 min-w-9 items-center justify-center gap-1.5 rounded-lg px-1 py-2 text-sm font-bold shadow-sm transition sm:min-h-10 sm:min-w-10 sm:px-4 {{ $isLanding ? 'bg-white text-sky-700 hover:bg-sky-50' : 'bg-orange-600 text-white hover:bg-orange-700' }}">
                             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="h-5 w-5 shrink-0"><path d="M10 17l5-5-5-5M15 12H3"></path><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"></path></svg>
                             <span class="sr-only md:not-sr-only">Masuk</span>

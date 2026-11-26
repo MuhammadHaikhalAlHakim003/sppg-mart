@@ -12,6 +12,7 @@ use App\Http\Controllers\SupplierPaymentSettingsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/', [WebController::class, 'index'])->name('home');
 Route::get('/catalog', [WebController::class, 'catalog'])->name('catalog');
@@ -80,6 +81,12 @@ Route::middleware(['auth', 'active.account'])->group(function () {
     Route::patch('/transactions/{order}/payment', [TransactionController::class, 'verifyPayment'])->name('transactions.payment.verify');
     Route::patch('/transactions/{order}/status', [TransactionController::class, 'updateStatus'])->name('transactions.status.update');
     Route::post('/products/{product:slug}/reviews', [ReviewController::class, 'store'])->name('products.reviews.store');
+    Route::get('/chatbot', [ChatbotController::class, 'index'])
+    ->name('chatbot.index');
+
+    Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])
+    ->middleware('throttle:20,1')
+    ->name('chatbot.send');
 });
 
 Route::middleware(['auth', 'active.account', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {

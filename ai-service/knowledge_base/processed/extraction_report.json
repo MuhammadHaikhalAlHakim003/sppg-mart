@@ -1,0 +1,24 @@
+{
+    "total_documents": 3,
+    "total_chunks": 317,
+    "documents": [
+        {
+            "filename": "juknis_mbg_2026.pdf",
+            "pages_extracted": 119,
+            "chunks_generated": 239,
+            "status": "success"
+        },
+        {
+            "filename": "peraturan_bgn_5_2026.pdf",
+            "pages_extracted": 8,
+            "chunks_generated": 17,
+            "status": "success"
+        },
+        {
+            "filename": "perpres_115_2025.pdf",
+            "pages_extracted": 30,
+            "chunks_generated": 61,
+            "status": "success"
+        }
+    ]
+}
