@@ -529,17 +529,29 @@ Sebelum repository dipublikasikan, pastikan hal-hal berikut:
 
 ## Dokumentasi Tampilan
 
-Simpan screenshot aplikasi pada direktori `docs/screenshots/`, kemudian
-tampilkan dengan Markdown. Contoh:
+### Halaman Utama SPPG Mart
 
-```markdown
+Halaman utama memperkenalkan platform SPPG Mart dan menyediakan akses menuju katalog kebutuhan pangan serta fitur aplikasi lainnya.
+
 ![Halaman utama SPPG Mart](docs/screenshots/homepage.png)
 
-![Halaman Asisten Informasi](docs/screenshots/ai-assistant.png)
-```
+### Halaman Marketplace
 
-Ganti nama file dengan screenshot yang benar-benar tersedia di
-repository.
+Halaman marketplace menampilkan area katalog produk bahan pangan yang dapat digunakan sebagai bagian dari alur pengadaan.
+
+![Halaman marketplace SPPG Mart](docs/screenshots/marketplace.png)
+
+### Halaman Asisten Informasi
+
+Halaman Asisten Informasi menyediakan antarmuka percakapan bagi pengguna untuk mengajukan pertanyaan seputar Program Makan Bergizi Gratis berdasarkan dokumen referensi yang tersedia.
+
+![Halaman Asisten Informasi SPPG](docs/screenshots/ai-assistant.png)
+
+### Contoh Respons Asisten AI
+
+Respons Asisten AI dapat disertai informasi sumber dokumen dan halaman yang digunakan oleh proses retrieval.
+
+![Contoh respons Asisten AI](docs/screenshots/ai-response.png)
 
 ---
 
